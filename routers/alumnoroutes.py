@@ -5,7 +5,7 @@ from models.models import (
     AlumnoUpdate,
 )
 
-from repositories.crud import (
+from repositories.alumnocrud import (
     crear_alumno,
     obtener_alumnos,
     obtener_alumno,
