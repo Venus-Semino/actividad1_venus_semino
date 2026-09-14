@@ -1,16 +1,10 @@
-import os
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import declarative_base 
 
-import psycopg
-from dotenv import load_dotenv
+SQLALCHEMY_DATABASE_URL = "mysql+pymysql://root:rootpassword@db:3306/actividad3"
 
-load_dotenv()
+engine = create_engine(SQLALCHEMY_DATABASE_URL)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-
-def get_connection():
-    return psycopg.connect(
-        host=os.getenv("POSTGRES_HOST"),
-        dbname=os.getenv("POSTGRES_DB"),
-        user=os.getenv("POSTGRES_USER"),
-        password=os.getenv("POSTGRES_PASSWORD"),
-        port=os.getenv("POSTGRES_PORT"),
-    )
+Base = declarative_base()
