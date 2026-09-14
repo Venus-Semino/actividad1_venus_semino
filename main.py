@@ -1,16 +1,10 @@
 from fastapi import FastAPI
+from database.database import Base, engine
+from routers import alumnoroutes, materiarouters 
 
-from routers.routes import router
+Base.metadata.create_all(bind=engine)
 
+app = FastAPI(title="API Actividad 3")
 
-app = FastAPI(
-    title="API de Alumnos",
-    version="1.0.0"
-)
-
-
-# ==================================================
-# ROUTES
-# ==================================================
-
-app.include_router(router)
+app.include_router(alumnoroutes.router)
+app.include_router(materiarouters.router)
